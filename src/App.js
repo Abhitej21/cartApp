@@ -3,15 +3,14 @@ import { Route, Switch } from 'react-router';
 import 'rsuite/dist/styles/rsuite-default.css';
 import Home from './pages/Home';
 import './styles/main.scss';
-import { ContextProvider } from './context/cart.context';
+import { CartProvider, ContextProvider } from './context/cart.context';
 import { Container, Navbar } from 'rsuite';
 import CheckOut from './pages/CheckOut';
 import CategoryContainer from './pages/Category';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <ContextProvider>
+    <CartProvider>
       <Container>
         <Navbar/>
     <Switch>
@@ -27,7 +26,7 @@ function App() {
       </Route>
     </Switch>
     </Container>
-    </ContextProvider>
+    </CartProvider>
   );
 }
 

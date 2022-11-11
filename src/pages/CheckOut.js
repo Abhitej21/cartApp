@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react'
 import { useCart, useCartDispatch } from '../context/cart.context'
 import PRODUCTS from '../components/products.json';
-import { Button, ButtonGroup, Table } from 'rsuite';
+import { Button, ButtonGroup,  Table } from 'rsuite';
 
+
+const {Column,HeaderCell,Cell} = Table;
 function checkOutItems(products,cartItems){
   const productsInCart = products.filter(product => 
     cartItems.some(item => item.id===product.id));
@@ -10,7 +12,7 @@ function checkOutItems(products,cartItems){
     return productsInCart.map(product => {
       return {
         ...product,
-        qunatity: cartItems.find(item => item.id===product.id).qunatity,
+        quantity: cartItems.find(item => item.id===product.id).quantity,
       };
     });
 }
@@ -23,7 +25,7 @@ const CheckOut = () => {
   const [products] = useState(PRODUCTS);
   const checkOutItemsList = checkOutItems(products,cart);
   const cartPriceTotal = checkOutItemsList.reduce((total,item) => 
-  total+item.price*item.qunatity,0);
+  total+item.price*item.quantity,0);
   const handleAdd = useCallback(id => {
     dispatchCart({type: 'ADD_ONE',id});
   },[dispatchCart]);
@@ -41,21 +43,21 @@ const CheckOut = () => {
     <div>
       <h1 className='h3 mb-4'>Checkout</h1>
       <div className='bg-white p-4 shadow-sm rounded-lg'>
-        <Table Responsive>
-          <thead>
-            <tr>
-              <th style={{borderTop: 0}}></th>
-              <th style={{borderTop: 0}}>Name</th>
-              <th style={{borderTop: 0}}>Price</th>
-              <th style={{borderTop: 0}}>Quantity</th>
-              <th style={{borderTop: 0}}></th>
-            </tr>
-          </thead>
+        <Table>
+          <Table.HeaderCell>
+            <Table.ColumnGroup>
+            <Column> <HeaderCell style={{borderTop: 0}}></HeaderCell><Cell dataKey='no'/> </Column> 
+             <Column> <HeaderCell style={{borderTop: 0}}>Name</HeaderCell><Cell dataKey='name'/> </Column>
+             <Column> <HeaderCell style={{borderTop: 0}}>Price</HeaderCell><Cell dataKey='price'/>  </Column>
+             <Column> <HeaderCell style={{borderTop: 0}}>Quantity</HeaderCell><Cell dataKey='quantity'/> </Column>
+            <Column> <HeaderCell style={{borderTop: 0}}></HeaderCell><Cell dataKey=''/> </Column>
+            </Table.ColumnGroup>
+          </Table.HeaderCell>
           <tbody>
             {checkOutItemsList.map(ele => (
               <tr key={ele.id}>
                 <td>
-                  <img src={ele.thumbnail} alt={ele.name}
+                  <img src={ele.thumbnail} alt={ele["name"]}
                   style={{width: 50, height: 'auto'}}/>
                 </td>
                 <td className='font-weigth-bold align-middle text-nowrap'>
@@ -70,7 +72,7 @@ const CheckOut = () => {
                       -
                     </Button>
                     <Button disabled style={{width: 45}}>
-                      {ele.qunatity}
+                      {ele.quantity}
                     </Button>
                     <Button size='sm' type="button" onClick={() => handleAdd(ele.id)}>
                       +
