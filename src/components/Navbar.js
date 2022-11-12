@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Nav,NavbarText } from 'rsuite'
 import NavItem from 'rsuite/lib/Nav/NavItem'
-import {ReactComponent as CartImg} from '../components/'
+import {ReactComponent as CartImg} from '../images/cart.svg';
 import { useCart } from '../context/cart.context'
 
 

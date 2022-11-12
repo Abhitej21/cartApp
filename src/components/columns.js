@@ -1,8 +1,5 @@
 export const columnList = [
-    {
-        Header: "",
-        accessor: "id"
-    },
+
 
     {
         Header: "Name",

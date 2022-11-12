@@ -16,7 +16,9 @@ function cartReducer(state, action) {
           )
         : state.concat({ id: action.id, quantity: 1, price: action.price });
     }
-
+    case 'CHANGE_QUANTITY': {
+      return state.some(item => item.id===action.id?{...item,quantity: action.newQuantity}:item);
+    }
     case 'REMOVE_ONE': {
       const isInCart = state.some(item => item.id === action.id);
 

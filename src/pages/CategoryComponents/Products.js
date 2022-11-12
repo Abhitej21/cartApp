@@ -16,6 +16,8 @@ const Products = ({ products }) => {
     [dispatchCart]
   );
 
+    
+
   if (products.length === 0) {
     return <div>No products found</div>;
   }

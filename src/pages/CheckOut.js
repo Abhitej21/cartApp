@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useCallback, useState } from 'react'
 import { Button, ButtonGroup, Table} from 'rsuite';
 import { useCart, useCartDispatch } from '../context/cart.context'
@@ -5,9 +6,10 @@ import PRODUCTS from '../components/products.json';
 
 
 const {Column,HeaderCell,Cell} = Table;
+
 export function checkOutItems(products,cartItems){
-  const productsInCart = products.filter(product => 
-    cartItems.some(item => item.id===product.id));
+  console.log(cartItems);
+  const productsInCart = products.filter(product => cartItems.some(item => item.id===product.id));
 
     return productsInCart.map(product => {
       return {
@@ -16,8 +18,6 @@ export function checkOutItems(products,cartItems){
       };
     });
 }
-
-
 
 const CheckOut = () => {
   const cart = useCart();
@@ -40,7 +40,7 @@ const CheckOut = () => {
   },[dispatchCart]);
 
 
-  console.log(checkOutItemsList);
+  
   return (
     
     <div>

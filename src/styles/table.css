@@ -17,6 +17,33 @@ table {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: #04AA6D;
+    background-color: white;
     color: white;
+  }
+
+  .inputBox {
+    width: 40px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: none transparent;
+  }
+
+  .fontText{
+    font-weight:bold;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .w-80{
+    width: 80%;
+  }
+  .w-10{
+    width: 10%;
+  }
+.w-100{
+  width: 100%;
+}
+  .justify-content-around{
+    justify-content: space-around;
   }

@@ -57,7 +57,7 @@ const Category = ({ category }) => {
   const totalCostInCart = cart.reduce((sum,item) => sum+item.quantity*item.price,0);
 
  
-  console.log(totalItemsInCart);
+  
   return (
     <Row>
       <Col xs={12} md={6} className="position-relative">
