@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react'
+import { Button, ButtonGroup, Table} from 'rsuite';
 import { useCart, useCartDispatch } from '../context/cart.context'
 import PRODUCTS from '../components/products.json';
-import { Button, ButtonGroup,  Table } from 'rsuite';
 
 
 const {Column,HeaderCell,Cell} = Table;
-function checkOutItems(products,cartItems){
+export function checkOutItems(products,cartItems){
   const productsInCart = products.filter(product => 
     cartItems.some(item => item.id===product.id));
 
@@ -39,25 +39,28 @@ const CheckOut = () => {
     dispatchCart({type: 'REMOVE',id});
   },[dispatchCart]);
 
+
+  console.log(checkOutItemsList);
   return (
+    
     <div>
       <h1 className='h3 mb-4'>Checkout</h1>
       <div className='bg-white p-4 shadow-sm rounded-lg'>
         <Table>
           <Table.HeaderCell>
             <Table.ColumnGroup>
-            <Column> <HeaderCell style={{borderTop: 0}}></HeaderCell><Cell dataKey='no'/> </Column> 
+            <Column> <HeaderCell style={{borderTop: 0}}>S No</HeaderCell><Cell dataKey='no'/> </Column> 
              <Column> <HeaderCell style={{borderTop: 0}}>Name</HeaderCell><Cell dataKey='name'/> </Column>
              <Column> <HeaderCell style={{borderTop: 0}}>Price</HeaderCell><Cell dataKey='price'/>  </Column>
              <Column> <HeaderCell style={{borderTop: 0}}>Quantity</HeaderCell><Cell dataKey='quantity'/> </Column>
-            <Column> <HeaderCell style={{borderTop: 0}}></HeaderCell><Cell dataKey=''/> </Column>
+            <Column> <HeaderCell style={{borderTop: 0}}>Modify</HeaderCell><Cell dataKey='add'/> </Column>
             </Table.ColumnGroup>
           </Table.HeaderCell>
           <tbody>
             {checkOutItemsList.map(ele => (
               <tr key={ele.id}>
                 <td>
-                  <img src={ele.thumbnail} alt={ele["name"]}
+                  <img src={ele.thumbnail} alt={ele.name}
                   style={{width: 50, height: 'auto'}}/>
                 </td>
                 <td className='font-weigth-bold align-middle text-nowrap'>

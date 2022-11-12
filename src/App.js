@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import 'rsuite/dist/styles/rsuite-default.css';
+import { Container, Navbar } from 'rsuite';
 import Home from './pages/Home';
 import './styles/main.scss';
-import { CartProvider, ContextProvider } from './context/cart.context';
-import { Container, Navbar } from 'rsuite';
-import CheckOut from './pages/CheckOut';
+import { CartProvider } from './context/cart.context';
 import CategoryContainer from './pages/Category';
+import CheckOutDup from './pages/CheckOutDup';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <CategoryContainer/>
       </Route>
       <Route exact path="/checkout">
-        <CheckOut/>
+        <CheckOutDup/>
       </Route>
     </Switch>
     </Container>

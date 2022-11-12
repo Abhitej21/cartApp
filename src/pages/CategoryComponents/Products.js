@@ -7,7 +7,6 @@ const Products = ({ products }) => {
 
   const handleAddToCart = useCallback(
     (id, price, inStock) => {
-      console.log(id);
       if (!inStock) {
         return;
       }
@@ -32,8 +31,8 @@ const Products = ({ products }) => {
       ...restOfProduct
     }) => (
       
-      <div key={restOfProduct.id} className="mb-3">
-        <img width="100%" src={thumbnail} alt={name} className="h-50" />
+      <div key={restOfProduct.id} className="mb-3 mr-3">
+        <img width="100%" src={thumbnail} alt={name} className="h-50 w-80" />
         <div className="font-weight">
           <h2 className="h5">{name}</h2>
           <p className="h5 mb-2">${price}</p>

@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { Col, Row } from 'rsuite';
-import { useParams } from 'react-router-dom';
+import { Button, Col, Row } from 'rsuite';
+import { Link, useParams } from 'react-router-dom';
 import fakeProducts from '../components/products.json';
 import categories from '../components/categories.json';
 import { useFilters } from '../context/useFilters';
 import FilterCheckbox from '../components/FilterCheckbox';
-import Products from '../pages/CategoryComponents/Products';
+import Products from './CategoryComponents/Products';
+import { useCart } from '../context/cart.context';
 
 function getComputedProducts(products, filters) {
   // const result = products; would create a reference thus doesn't apply
@@ -39,19 +40,24 @@ const Category = ({ category }) => {
   const filteredProducts = getComputedProducts(products, filter);
 
   const onCheckboxChange = useCallback(
-    (ev) => {
-      console.log(ev);
-      const checkbox = ev.target;
+    (_,checked,event) => {
 
       dispatchFilter({
         type: 'SET',
-        filterName: checkbox.name,
-        value: checkbox.checked,
+        filterName: event.target.name,
+        value: checked,
       });
     },
     [dispatchFilter]
   );
 
+  const cart = useCart();
+  
+  const totalItemsInCart = cart.reduce((total,item) => total+item.quantity,0);
+  const totalCostInCart = cart.reduce((sum,item) => sum+item.quantity*item.price,0);
+
+ 
+  console.log(totalItemsInCart);
   return (
     <Row>
       <Col xs={12} md={6} className="position-relative">
@@ -83,9 +89,19 @@ const Category = ({ category }) => {
           </div>
         </div>
       </Col>
-      <Col xs={12} md={6} className="mt-3 mt-md-0">
-        <h1 className="h3">{category.name}</h1>
-        <div>
+      <Col xs={12} md={16} className="mt-3 mt-md-0">
+        <div className='d-flex align-items-center justify-content-between'>
+        <h1 className="h3 br-circle">{category.name}</h1>
+          
+            <Link to='/checkout' className='link-unstyled'>
+            <div className='d-flex'>
+            <Button className='br-circle mr-1' size="sm" color="green">{totalItemsInCart}</Button>
+            <h4 className='text-green'>{` $ ${totalCostInCart}`}</h4>
+            </div>
+            </Link>
+          
+        </div>
+        <div className="d-flex justify-content-center">
           <Products products={filteredProducts} />
         </div>
       </Col>
